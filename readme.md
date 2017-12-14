@@ -1,6 +1,6 @@
-## Laravel API Boilerplate (JWT Edition) for Laravel 5.5
+## Laravel Marketplace
 
-Laravel API Boilerplate is a "starter kit" you can use to build your first API in seconds. As you can easily imagine, it is built on top of the awesome Laravel Framework. This version is built on Laravel 5.5!
+Laravel marketplace is a classified or buy and sell application that allow users to post ads.
 
 It is built on top of three big guys:
 
@@ -26,7 +26,7 @@ Just be aware that some options in the `config/boilerplate.php` file are changed
 * [How to Build an API-Only JWT-Powered Laravel App](https://www.sitepoint.com/how-to-build-an-api-only-jwt-powered-laravel-app/)
 * [How to Consume Laravel API with AngularJS](https://www.sitepoint.com/how-to-consume-laravel-api-with-angularjs/)
 
-**WARNING:** the articles are old and Laravel 5.1 related. Just use them as "inspiration". Even without updated tutorials, they should be enough. 
+**WARNING:** the articles are old and Laravel 5.1 related. Just use them as "inspiration". Even without updated tutorials, they should be enough.
 
 ## Main Features
 
@@ -63,11 +63,11 @@ return [
 
     // these options are related to the sign-up procedure
     'sign_up' => [
-        
+
         // this option must be set to true if you want to release a token
         // when your user successfully terminates the sign-in procedure
         'release_token' => env('SIGN_UP_RELEASE_TOKEN', false),
-        
+
         // here you can specify some validation rules for your sign-in request
         'validation_rules' => [
             'name' => 'required',
@@ -78,7 +78,7 @@ return [
 
     // these options are related to the login procedure
     'login' => [
-        
+
         // here you can specify some validation rules for your login request
         'validation_rules' => [
             'email' => 'required|email',
@@ -88,7 +88,7 @@ return [
 
     // these options are related to the password recovery procedure
     'forgot_password' => [
-        
+
         // here you can specify some validation rules for your password recovery procedure
         'validation_rules' => [
             'email' => 'required|email'
@@ -97,11 +97,11 @@ return [
 
     // these options are related to the password recovery procedure
     'reset_password' => [
-        
+
         // this option must be set to true if you want to release a token
         // when your user successfully terminates the password reset procedure
         'release_token' => env('PASSWORD_RESET_RELEASE_TOKEN', false),
-        
+
         // here you can specify some validation rules for your password recovery procedure
         'validation_rules' => [
             'token' => 'required',
