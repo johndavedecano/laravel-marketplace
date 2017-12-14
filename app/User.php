@@ -59,4 +59,24 @@ class User extends Authenticatable implements JWTSubject
     {
         return [];
     }
+
+    /**
+     * Get users posts
+     *
+     * @return Illuminate\Database\Eloquent\Collection void
+     */
+    public function posts()
+    {
+        return $this->hasMany('App\Post');
+    }
+
+    /**
+     * Get user comments collection
+     *
+     * @return Illuminate\Database\Eloquent\Collection
+     */
+    public function comments()
+    {
+        return $this->hasMany('App\Comment');
+    }
 }
