@@ -12,7 +12,7 @@ What I made is really simple: an integration of these three packages and a setup
 
 ## Installation
 
-1. run `composer create-project francescomalatesta/laravel-api-boilerplate-jwt myNextProject`;
+1. run `composer create-project johndavedecano/laravel-marketplace marketplace`;
 2. have a coffee, nothing to do here;
 
 Once the project creation procedure will be completed, run the `php artisan migrate` command to install the required tables.
