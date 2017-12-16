@@ -36,7 +36,7 @@ class LocationController extends Controller
      */
     public function index()
     {
-        return LocationResource::collection($this->location->paginate());
+        return LocationResource::collection($this->location->all());
     }
 
     /**
