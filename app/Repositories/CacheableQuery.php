@@ -14,7 +14,7 @@ trait CacheableQuery
      *
      * @param string $key
      * @param integer $time
-     * @param Illuminate\Database\Eloquent\Collection $query
+     * @param Illuminate\Database\Eloquent\Collection|Illuminate\Database\Eloquent\Model $query
      * @return Illuminate\Database\Eloquent\Collection|Illuminate\Database\Eloquent\Model
      */
     public function cache($key, $time = 60, $query)
