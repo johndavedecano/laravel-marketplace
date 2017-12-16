@@ -10,7 +10,7 @@ class ImageController extends Controller
     {
     }
 
-    public function create()
+    public function store()
     {
     }
 

@@ -19,6 +19,13 @@ $api->version('v1', function (Router $api) {
     });
 
     $api->group(['middleware' => 'jwt.auth'], function (Router $api) {
+        $api->resource('categories', 'App\\Api\\V1\\Controllers\\CategoryController', ['except' => ['create', 'edit']]);
+        $api->resource('comments', 'App\\Api\\V1\\Controllers\\CommentController', ['except' => ['create', 'edit']]);
+        $api->resource('locations', 'App\\Api\\V1\\Controllers\\LocationController', ['except' => ['create', 'edit']]);
+        $api->resource('images', 'App\\Api\\V1\\Controllers\\ImageController', ['except' => ['create', 'edit']]);
+        $api->resource('posts', 'App\\Api\\V1\\Controllers\\PostController', ['except' => ['create', 'edit']]);
+        $api->resource('users', 'App\\Api\\V1\\Controllers\\UserController', ['except' => ['create', 'edit']]);
+        
         $api->get('refresh', [
             'middleware' => 'jwt.refresh',
             function () {

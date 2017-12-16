@@ -31,4 +31,24 @@ class UserController extends Controller
     {
         return response()->json(Auth::guard()->user());
     }
+
+    public function index()
+    {
+    }
+
+    public function store()
+    {
+    }
+
+    public function show()
+    {
+    }
+
+    public function destroy()
+    {
+    }
+
+    public function update()
+    {
+    }
 }
