@@ -12,6 +12,8 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
+        User::truncate();
+
         $user = new User([
             'name' => 'John Dave Decano',
             'email' => 'user@user.com',
