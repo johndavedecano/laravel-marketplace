@@ -17,8 +17,8 @@ $api->version('v1', function (Router $api) {
         $api->post('refresh', 'App\\Api\\V1\\Controllers\\RefreshController@refresh');
         $api->get('me', 'App\\Api\\V1\\Controllers\\UserController@me');
     });
-
-    $api->group(['middleware' => 'jwt.auth'], function (Router $api) {
+    //'middleware' => 'jwt.auth'
+    $api->group([], function (Router $api) {
         $api->resource('categories', 'App\\Api\\V1\\Controllers\\CategoryController', ['except' => ['create', 'edit']]);
         $api->resource('comments', 'App\\Api\\V1\\Controllers\\CommentController', ['except' => ['create', 'edit']]);
         $api->resource('locations', 'App\\Api\\V1\\Controllers\\LocationController', ['except' => ['create', 'edit']]);
