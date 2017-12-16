@@ -3,7 +3,7 @@
 use Bosnadev\Repositories\Contracts\RepositoryInterface;
 use Bosnadev\Repositories\Eloquent\Repository;
 
-trait FindOrFailTrait
+trait FindOrFail
 {
     /**
      * Find a given resource then throw an exception if not found
