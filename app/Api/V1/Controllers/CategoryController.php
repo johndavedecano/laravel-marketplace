@@ -68,11 +68,29 @@ class CategoryController extends Controller
         return new CategoryResource($category);
     }
 
-    public function show()
+    /**
+     * Show an existing reseource
+     *
+     * @param int $id
+     * @return Response
+     */
+    public function show($id)
     {
+        $category = $this->category->find($id);
+        
+        return new CategoryResource($category);
     }
 
-    public function destroy()
+    /**
+     * Delete a resource
+     *
+     * @param int $id
+     * @return Response
+     */
+    public function destroy($id)
     {
+        $destroyed = $this->category->delete($id);
+        
+        return response()->json(['data' => ['success' => (bool)$destroyed]]);
     }
 }
