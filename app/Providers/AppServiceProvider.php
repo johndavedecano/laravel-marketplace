@@ -13,7 +13,12 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        app('api.exception')->register(function (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {
+            return response()->make(
+                ['error' => 'Resource not found'],
+                404
+            );
+        });
     }
 
     /**

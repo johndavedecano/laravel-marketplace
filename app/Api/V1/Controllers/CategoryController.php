@@ -13,7 +13,7 @@ use App\Repositories\CategoryRepository;
 class CategoryController extends Controller
 {
     /**
-     * Repository from categories table
+     * Repository for the subject database table
      *
      * @var App\Repositories\CategoryRepository
      */
@@ -61,7 +61,7 @@ class CategoryController extends Controller
      */
     public function update($id, CategoryRequest $request)
     {
-        $category = $this->category->find($id);
+        $category = $this->category->findOrFail($id);
 
         $category->update($request->only('name'));
 
@@ -76,7 +76,7 @@ class CategoryController extends Controller
      */
     public function show($id)
     {
-        $category = $this->category->find($id);
+        $category = $this->category->findOrFail($id);
         
         return new CategoryResource($category);
     }
