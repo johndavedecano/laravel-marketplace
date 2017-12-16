@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Seeder;
 use App\User;
+use Illuminate\Database\Connection as DB;
 
 class UsersTableSeeder extends Seeder
 {
@@ -21,5 +22,9 @@ class UsersTableSeeder extends Seeder
         ]);
 
         $user->save();
+
+        factory(App\User::class, 10)->create(['is_superadmin' => true]);
+
+        factory(App\User::class, 10)->create(['is_superadmin' => false]);
     }
 }
