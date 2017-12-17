@@ -27,6 +27,9 @@ class LocationController extends Controller
     public function __construct(LocationRepository $location)
     {
         $this->location = $location;
+
+        $this->middleware('jwt.auth')->except(['index', 'show']);
+        $this->middleware('auth.admin')->except(['index', 'show']);
     }
     
     /**

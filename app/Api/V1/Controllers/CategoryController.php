@@ -27,6 +27,9 @@ class CategoryController extends Controller
     public function __construct(CategoryRepository $category)
     {
         $this->category = $category;
+
+        $this->middleware('jwt.auth')->except(['index', 'show']);
+        $this->middleware('auth.admin')->except(['index', 'show']);
     }
     
     /**
