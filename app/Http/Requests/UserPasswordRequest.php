@@ -2,7 +2,7 @@
 
 namespace App\Http\Requests;
 
-use Illuminate\Foundation\Http\FormRequest;
+use Dingo\Api\Http\FormRequest;
 
 class UserPasswordRequest extends FormRequest
 {
@@ -13,7 +13,7 @@ class UserPasswordRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,8 @@ class UserPasswordRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'password' => 'required_with:new_password|password|max:16|min:5',
+            'new_password' => 'confirmed|max:16|min:5',
         ];
     }
 }

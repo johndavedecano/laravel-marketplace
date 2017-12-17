@@ -36,8 +36,8 @@ class UserControllerTest extends TestCase
 
     public function testMe()
     {
-        $token = $this->login('test@email.com', '123456');
-        $headers = ['Authorization' => 'Bearer '.$token];
+        $login = $this->login('test@email.com', '123456');
+        $headers = ['Authorization' => 'Bearer '.$login['token']];
         $response = $this->withHeaders($headers)->json('GET', '/api/auth/me');
         $response
             ->assertJsonStructure(['data' => ['id', 'avatar', 'name']])
@@ -65,6 +65,52 @@ class UserControllerTest extends TestCase
         $response = $this->withHeaders([])->json('GET', '/api/users');
         $response
             ->assertJsonStructure(['data', 'links'])
+            ->assertStatus(200);
+    }
+
+    public function testUpdateProfileCValidationError()
+    {
+        $login = $this->login('test@email.com', '123456');
+        $headers = [
+            'Authorization' => 'Bearer ' . $login['token'],
+            'Content-Type' => 'x-www-form-urlencoded',
+        ];
+        $data = ['_method' => 'PUT'];
+        $response = $this
+            ->withHeaders($headers)
+            ->json(
+                'PUT',
+                '/api/users/'.$login['user']['id'],
+                $data
+            );
+        
+        $response->assertStatus(422);
+    }
+
+    public function testUpdateProfile()
+    {
+        $login = $this->login('test@email.com', '123456');
+        $headers = [
+            'Authorization' => 'Bearer ' . $login['token'],
+            'Content-Type' => 'x-www-form-urlencoded',
+        ];
+        $name = str_random();
+        $avatar = 'https://s3.amazonaws.com/uifaces/faces/twitter/abinav_t/128.jpg';
+        $data = ['_method' => 'PUT', 'name' => $name, 'avatar' => $avatar];
+        $response = $this
+            ->withHeaders($headers)
+            ->json(
+                'PUT',
+                '/api/users/'.$login['user']['id'],
+                $data
+            );
+        
+        $response
+            ->assertJson(['data' => [
+                'id' => $login['user']['id'],
+                'name' => $name,
+                'avatar' => $avatar
+            ]])
             ->assertStatus(200);
     }
 }

@@ -20,6 +20,6 @@ trait LoginTrait
         
         $responseJSON = json_decode($response->getContent(), true);
         
-        return $responseJSON['token'];
+        return $responseJSON;
     }
 }

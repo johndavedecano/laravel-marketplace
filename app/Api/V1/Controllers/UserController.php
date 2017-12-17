@@ -8,7 +8,9 @@ use App\Repositories\UserRepository;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\UserResource;
 use Illuminate\Auth\Access\AuthorizationException;
-use Illuminate\Http\Request;
+use App\Http\Requests\UserProfileRequest;
+use App\Http\Requests\UserPasswordRequest;
+use App\Http\Requests\UserAccountRequest;
 
 /**
  * UserController
@@ -62,39 +64,30 @@ class UserController extends Controller
 
     /**
      * @param int $id
-     * @param Request $request
+     * @param App\Http\Requests\UserProfileRequest  $request
      * @return \Illuminate\Http\JsonResponse
      */
-    public function update($id, Request $request)
+    public function update($id, UserProfileRequest $request)
     {
-        $data = $request->validate([
-            'name' => 'required|min:2|max:100'
-        ]);
-
         $user = $this->user->findOrFail($id);
 
         $this->authorize('update', $user);
 
-        $user->update($data);
+        $user->update($request->only(['avatar', 'name']));
 
         return new UserResource($this->user->findOrFail($id));
     }
 
     /**
      * @param int $id
-     * @param Request $request
+     * @param App\Http\Requests\UserPasswordRequest $request
      *
      * @return \Illuminate\Http\JsonResponse
      *
      * @throws Illuminate\Auth\Access\AuthorizationException
      */
-    public function password($id, Request $request)
+    public function password($id, UserPasswordRequest $request)
     {
-        $request->validate([
-            'password' => 'required_with:new_password|password|max:16|min:5',
-            'new_password' => 'confirmed|max:16|min:5',
-        ]);
-
         $user = $this->user->findOrFail($id);
 
         if (!$user->isPasswordValid($request->get('password'))) {
@@ -112,17 +105,13 @@ class UserController extends Controller
 
     /**
      * @param int $id
-     * @param Request $request
+     * @param App\Http\Requests\UserAccountRequest $request
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    public function account($id, Request $request)
+    public function account($id, UserAccountRequest $request)
     {
         $user = $this->user->findOrFail($id);
-
-        $request->validate([
-            'email' => 'required|unique:users,email,'.$id
-        ]);
 
         $this->authorize('update', $user);
 

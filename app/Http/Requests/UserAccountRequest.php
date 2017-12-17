@@ -2,7 +2,7 @@
 
 namespace App\Http\Requests;
 
-use Illuminate\Foundation\Http\FormRequest;
+use Dingo\Api\Http\FormRequest;
 
 class UserAccountRequest extends FormRequest
 {
@@ -13,7 +13,7 @@ class UserAccountRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,7 @@ class UserAccountRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'email' => 'required|unique:users,email,'.auth()->id
         ];
     }
 }

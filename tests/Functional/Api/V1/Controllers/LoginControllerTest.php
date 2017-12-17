@@ -34,7 +34,8 @@ class LoginControllerTest extends TestCase
         ])->assertJsonStructure([
             'status',
             'token',
-            'expires_in'
+            'expires_in',
+            'user'
         ])->isOk();
     }
 
