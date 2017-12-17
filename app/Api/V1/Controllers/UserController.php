@@ -40,7 +40,7 @@ class UserController extends Controller
      */
     public function me()
     {
-        return response()->json(Auth::guard()->user());
+        return new UserResource(Auth::guard()->user());
     }
 
     /**
