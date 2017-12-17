@@ -6,10 +6,11 @@ use Hash;
 use App\User;
 use App\TestCase;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
+use App\Functional\Api\V1\Controllers\LoginTrait;
 
 class UserControllerTest extends TestCase
 {
-    use DatabaseMigrations;
+    use DatabaseMigrations, LoginTrait;
 
     public function setUp()
     {
@@ -22,25 +23,19 @@ class UserControllerTest extends TestCase
         ]);
 
         $user->save();
+
+        $user = new User([
+            'name' => 'Admin',
+            'email' => 'admin@email.com',
+            'password' => '123456',
+            'is_superadmin' => true
+        ]);
+
+        $user->save();
     }
 
     public function testMe()
     {
-        $response = $this->post('api/auth/login', [
-            'email' => 'test@email.com',
-            'password' => '123456'
-        ]);
-
-        $response->assertStatus(200);
-
-        $responseJSON = json_decode($response->getContent(), true);
-        $token = $responseJSON['token'];
-
-        $this->get('api/auth/me', [], [
-            'Authorization' => 'Bearer ' . $token
-        ])->assertJson([
-            'name' => 'Test',
-            'email' => 'test@email.com'
-        ])->isOk();
+        $token = $this->login('test@email.com', '123456');
     }
 }

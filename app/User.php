@@ -6,10 +6,14 @@ use Hash;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Tymon\JWTAuth\Contracts\JWTSubject;
+use Illuminate\Database\Eloquent\Model;
+
+use App\Traits\Ownership;
+use App\Traits\ValidatesPassword;
 
 class User extends Authenticatable implements JWTSubject
 {
-    use Notifiable;
+    use Notifiable, Ownership, ValidatesPassword;
 
     /**
      * The attributes that are mass assignable.

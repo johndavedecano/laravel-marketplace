@@ -29,6 +29,7 @@ class CategoryController extends Controller
         $this->category = $category;
 
         $this->middleware('jwt.auth')->except(['index', 'show']);
+        $this->middleware('auth:api')->except(['index', 'show']);
         $this->middleware('auth.admin')->except(['index', 'show']);
     }
     

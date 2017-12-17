@@ -27,7 +27,6 @@ class UpdatePostsTableAddSlug extends Migration
     {
         Schema::table('posts', function (Blueprint $table) {
             $table->dropColumn('slug');
-            $table->dropUnique('posts_slug_unique');
         });
     }
 }

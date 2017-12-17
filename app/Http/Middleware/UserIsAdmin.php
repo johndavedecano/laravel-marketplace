@@ -3,7 +3,7 @@
 namespace App\Http\Middleware;
 
 use Closure;
-use Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException;
+use Illuminate\Auth\Access\AuthorizationException;
 
 class UserIsAdmin
 {
@@ -12,17 +12,17 @@ class UserIsAdmin
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \Closure  $next
-     * @throws UnauthorizedHttpException
+     * @throws AuthorizationException
      * @return mixed
      */
     public function handle($request, Closure $next)
     {
-        $user = auth()->user();
+        $user = auth()->guard()->user();
 
         if ($user && $user->is_superadmin) {
             return $next($request);
         }
 
-        throw new UnauthorizedHttpException;
+        throw new AuthorizationException;
     }
 }

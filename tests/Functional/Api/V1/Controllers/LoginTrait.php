@@ -9,11 +9,11 @@ trait LoginTrait
      *
      * @return string
      */
-    public function login()
+    public function login($email, $password)
     {
         $response = $this->post('api/auth/login', [
-            'email' => 'test@email.com',
-            'password' => '123456'
+            'email' => $email,
+            'password' => $password
         ]);
         
         $response->assertStatus(200);
