@@ -30,7 +30,7 @@ class SignUpControllerTest extends TestCase
             'email' => 'test@email.com',
             'password' => '123456'
         ])->assertJsonStructure([
-            'status', 'token'
+            'status'
         ])->assertJson([
             'status' => 'ok'
         ])->assertStatus(201);

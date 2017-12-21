@@ -14,6 +14,24 @@ class Post extends Model
     protected $table = 'posts';
 
     /**
+     * Unguarded fields
+     *
+     * @var array
+     */
+    public $fillable = [
+        'user_id',
+        'location_id',
+        'title',
+        'description',
+        'price',
+        'status',
+        'is_expired',
+        'is_featured',
+        'is_hidden',
+        'expires_at',
+    ];
+
+    /**
      * Get user relationship
      *
      * @return App\User

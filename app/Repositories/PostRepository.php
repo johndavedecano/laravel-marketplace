@@ -7,6 +7,6 @@ class PostRepository extends Repository
 {
     public function model()
     {
-        return 'App\Post';
+        return App\Post::class;
     }
 }

@@ -24,6 +24,8 @@ $api->version('v1', function (Router $api) {
     $api->resource('images', 'App\\Api\\V1\\Controllers\\ImageController', ['except' => ['create', 'edit']]);
     $api->resource('posts', 'App\\Api\\V1\\Controllers\\PostController', ['except' => ['create', 'edit']]);
     $api->resource('users', 'App\\Api\\V1\\Controllers\\UserController', ['except' => ['create', 'edit']]);
+    $api->put('users/{user}/password', 'App\\Api\\V1\\Controllers\\UserController@password');
+    $api->put('users/{user}/account', 'App\\Api\\V1\\Controllers\\UserController@account');
 
     $api->get('refresh', ['middleware' => ['jwt.auth', 'jwt.refresh'],
         function () {

@@ -12,6 +12,6 @@ class CommentRepository extends Repository
      */
     public function model()
     {
-        return 'App\Comment';
+        return App\Comment::class;
     }
 }

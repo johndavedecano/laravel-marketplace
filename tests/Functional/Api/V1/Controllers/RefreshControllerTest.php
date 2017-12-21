@@ -18,7 +18,8 @@ class RefreshControllerTest extends TestCase
         $user = new User([
             'name' => 'Test',
             'email' => 'test@email.com',
-            'password' => '123456'
+            'password' => '123456',
+            'is_activated' => true
         ]);
 
         $user->save();

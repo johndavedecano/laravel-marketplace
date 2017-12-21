@@ -29,8 +29,10 @@ class UserController extends Controller
      */
     public function __construct(UserRepository $user)
     {
-        $this->middleware('jwt.auth')->only(['me', 'update']);
-        $this->middleware('auth:api')->only(['me', 'update']);
+        $protected = ['me', 'update', 'password', 'account'];
+
+        $this->middleware('jwt.auth')->only($protected);
+        $this->middleware('auth:api')->only($protected);
 
         $this->user = $user;
     }

@@ -24,10 +24,9 @@ class SignUpController extends Controller
             ], 201);
         }
 
-        $token = $JWTAuth->fromUser($user);
         return response()->json([
             'status' => 'ok',
-            'token' => $token
+            'message' => 'Activation code was successfully sent to your email.'
         ], 201);
     }
 }

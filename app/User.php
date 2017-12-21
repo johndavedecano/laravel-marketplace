@@ -21,7 +21,7 @@ class User extends Authenticatable implements JWTSubject
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'avatar'
+        'name', 'email', 'password', 'avatar', 'activation_code', 'is_activated',
     ];
 
     /**
@@ -32,6 +32,17 @@ class User extends Authenticatable implements JWTSubject
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    /**
+     * Automaticall creates hash for the user activation code.
+     *
+     * @param string $value
+     * @return void
+     */
+    public function setActivationCodeAttribute($value)
+    {
+        $this->attributes['activation_code'] = Hash::make($value);
+    }
 
     /**
      * Automatically creates hash for the user password.

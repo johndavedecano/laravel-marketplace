@@ -2,9 +2,9 @@
 
 namespace App\Http\Requests;
 
-use Dingo\Api\Http\FormRequest;
+use Illuminate\Foundation\Http\FormRequest;
 
-class UserPasswordRequest extends FormRequest
+class PostCreateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,9 +24,10 @@ class UserPasswordRequest extends FormRequest
     public function rules()
     {
         return [
-            'password' => 'required|max:16|min:5',
-            'new_password' => 'required|confirmed|max:16|min:5',
-            'new_password_confirmation' => 'required|max:16|min:5'
+            'location_id' => 'required|exists:locations,id',
+            'title' => 'required|max:140',
+            'description' => 'required|max:10000',
+            'price' => 'required|numeric'
         ];
     }
 }

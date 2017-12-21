@@ -19,7 +19,7 @@ class LocationRepository extends Repository
      */
     public function model()
     {
-        return 'App\Location';
+        return App\Location::class;
     }
 
     /**

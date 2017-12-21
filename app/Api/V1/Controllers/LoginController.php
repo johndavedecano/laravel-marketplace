@@ -33,12 +33,18 @@ class LoginController extends Controller
             throw new HttpException(500);
         }
 
+        $user = Auth::guard()->user();
+
+        if (!$user->is_activated) {
+            throw new AccessDeniedHttpException('Your account is not yet activated.');
+        }
+
         return response()
             ->json([
                 'status' => 'ok',
                 'token' => $token,
                 'expires_in' => Auth::guard()->factory()->getTTL() * 60,
-                'user' => Auth::guard()->user(),
+                'user' => $user,
             ]);
     }
 }

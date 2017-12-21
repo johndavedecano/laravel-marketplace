@@ -16,7 +16,7 @@ class CategoryRepository extends Repository
      */
     public function model()
     {
-        return 'App\Category';
+        return App\Category::class;
     }
 
     /**

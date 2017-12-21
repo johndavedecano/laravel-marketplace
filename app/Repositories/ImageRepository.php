@@ -7,6 +7,6 @@ class ImageRepository extends Repository
 {
     public function model()
     {
-        return 'App\Image';
+        return App\Image::class;
     }
 }

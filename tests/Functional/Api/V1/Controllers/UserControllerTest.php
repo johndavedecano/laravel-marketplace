@@ -19,7 +19,8 @@ class UserControllerTest extends TestCase
         $user = new User([
             'name' => 'Test',
             'email' => 'test@email.com',
-            'password' => '123456'
+            'password' => '123456',
+            'is_activated' => true
         ]);
 
         $user->save();
@@ -28,7 +29,17 @@ class UserControllerTest extends TestCase
             'name' => 'Admin',
             'email' => 'admin@email.com',
             'password' => '123456',
-            'is_superadmin' => true
+            'is_superadmin' => true,
+            'is_activated' => true
+        ]);
+
+        $user->save();
+
+        $user = new User([
+            'name' => 'Test',
+            'email' => 'test2@email.com',
+            'password' => '123456',
+            'is_activated' => true,
         ]);
 
         $user->save();
@@ -111,6 +122,62 @@ class UserControllerTest extends TestCase
                 'name' => $name,
                 'avatar' => $avatar
             ]])
+            ->assertStatus(200);
+    }
+
+    public function testUpdateProfileBadUser()
+    {
+        $login = $this->login('test@email.com', '123456');
+        $login2 = $this->login('test2@email.com', '123456');
+
+        $headers = [
+            'Authorization' => 'Bearer ' . $login2['token'],
+            'Content-Type' => 'x-www-form-urlencoded',
+        ];
+
+        $name = str_random();
+        $avatar = 'https://s3.amazonaws.com/uifaces/faces/twitter/abinav_t/128.jpg';
+        $data = ['_method' => 'PUT', 'name' => $name, 'avatar' => $avatar];
+        $response = $this
+            ->withHeaders($headers)
+            ->json(
+                'PUT',
+                '/api/users/'.$login['user']['id'],
+                $data
+            );
+        
+        $response
+            ->assertJsonStructure(['error', 'status'])
+            ->assertStatus(401);
+    }
+
+    public function testUpdatePassword()
+    {
+        $login = $this->login('test@email.com', '123456');
+
+        $headers = [
+            'Authorization' => 'Bearer ' . $login['token'],
+            'Content-Type' => 'x-www-form-urlencoded',
+        ];
+        
+        $avatar = 'https://s3.amazonaws.com/uifaces/faces/twitter/abinav_t/128.jpg';
+        $data = [
+            '_method' => 'PUT',
+            'password' => 123456,
+            'new_password' => 654321,
+            'new_password_confirmation' => 654321
+        ];
+
+        $response = $this
+            ->withHeaders($headers)
+            ->json(
+                'PUT',
+                '/api/users/'.$login['user']['id'].'/password',
+                $data
+            );
+        
+        $response
+            ->assertJsonStructure(['data' => ['id', 'name', 'avatar']])
             ->assertStatus(200);
     }
 }
