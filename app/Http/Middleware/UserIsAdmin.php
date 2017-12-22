@@ -23,6 +23,6 @@ class UserIsAdmin
             return $next($request);
         }
 
-        throw new AuthorizationException;
+        throw new AuthorizationException('You must be an admin to do this.');
     }
 }
