@@ -1,5 +1,6 @@
 <?php namespace App\Repositories;
 
+use App\Category;
 use Bosnadev\Repositories\Contracts\RepositoryInterface;
 use Bosnadev\Repositories\Eloquent\Repository;
 use App\Repositories\FindOrFail;
@@ -16,7 +17,7 @@ class CategoryRepository extends Repository
      */
     public function model()
     {
-        return App\Category::class;
+        return Category::class;
     }
 
     /**

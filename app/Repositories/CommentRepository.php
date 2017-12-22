@@ -1,5 +1,6 @@
 <?php namespace App\Repositories;
 
+use App\Comment;
 use Bosnadev\Repositories\Contracts\RepositoryInterface;
 use Bosnadev\Repositories\Eloquent\Repository;
 
@@ -12,6 +13,6 @@ class CommentRepository extends Repository
      */
     public function model()
     {
-        return App\Comment::class;
+        return Comment::class;
     }
 }

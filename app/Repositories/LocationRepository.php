@@ -1,5 +1,6 @@
 <?php namespace App\Repositories;
 
+use App\Location;
 use Bosnadev\Repositories\Contracts\RepositoryInterface;
 use Bosnadev\Repositories\Eloquent\Repository;
 use App\Repositories\FindOrFail;
@@ -19,7 +20,7 @@ class LocationRepository extends Repository
      */
     public function model()
     {
-        return App\Location::class;
+        return Location::class;
     }
 
     /**

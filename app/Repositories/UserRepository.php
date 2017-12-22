@@ -1,5 +1,6 @@
 <?php namespace App\Repositories;
 
+use App\User;
 use Bosnadev\Repositories\Contracts\RepositoryInterface;
 use Bosnadev\Repositories\Eloquent\Repository;
 use App\Repositories\FindOrFail;
@@ -19,7 +20,7 @@ class UserRepository extends Repository
      */
     public function model()
     {
-        return App\User::class;
+        return User::class;
     }
 
     /**

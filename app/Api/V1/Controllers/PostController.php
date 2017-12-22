@@ -8,6 +8,9 @@ use App\Http\Requests\PostUpdateRequest;
 use App\Http\Requests\PostCreateRequest;
 use App\Repositories\PostRepository;
 
+/**
+ * PostController
+ */
 class PostController extends Controller
 {
     /**

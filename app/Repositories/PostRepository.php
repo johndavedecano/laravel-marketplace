@@ -1,5 +1,6 @@
 <?php namespace App\Repositories;
 
+use App\Post;
 use Bosnadev\Repositories\Contracts\RepositoryInterface;
 use Bosnadev\Repositories\Eloquent\Repository;
 use App\Repositories\FindOrFail;
@@ -14,7 +15,7 @@ class PostRepository extends Repository
      */
     public function model()
     {
-        return App\Post::class;
+        return Post::class;
     }
 
     /**
