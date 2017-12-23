@@ -29,7 +29,7 @@ class CreatePostsTable extends Migration
             $table->boolean('is_featured')->default(false);
             $table->boolean('is_hidden')->default(false);
 
-            $table->date('expires_at');
+            $table->date('expires_at')->nullable();
 
             $table->integer('views')->default(0);
             

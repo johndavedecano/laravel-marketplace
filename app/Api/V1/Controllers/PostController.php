@@ -56,23 +56,21 @@ class PostController extends Controller
             'location_id' => $request->get('location_id'),
             'title' => $request->get('title'),
             'description' => $request->get('description'),
-            'price' => $request->get('price'),
-            'status' => $request->get('status'),
+            'price' => $request->get('price', 0),
+            'status' => $request->get('status', 'active'),
         ];
 
         $post = $this->post->create($data);
 
-        foreach ($request->get('images') as $imageId) {
+        foreach ($request->get('images', []) as $imageId) {
             $post->images()->attach($imageId);
         }
 
-        foreach ($request->get('categories') as $postId) {
-            $post->categories()->attach($postId);
-        }
+        $post->categories()->attach($request->get('category'));
 
         $post->save();
         
-        return new PostResource($this->post->findOrFail($post->id));
+        return new PostResource($post);
     }
 
     /**
@@ -92,8 +90,8 @@ class PostController extends Controller
             'location_id' => $request->get('location_id'),
             'title' => $request->get('title'),
             'description' => $request->get('description'),
-            'price' => $request->get('price'),
-            'status' => $request->get('status'),
+            'price' => $request->get('price', 0),
+            'status' => $request->get('status', 'active'),
         ];
 
         $post->update($data);
@@ -102,9 +100,7 @@ class PostController extends Controller
             $post->images()->attach($imageId);
         }
 
-        foreach ($request->get('categories') as $postId) {
-            $post->categories()->attach($postId);
-        }
+        $post->categories()->attach($request->get('category'));
 
         $post->save();
 

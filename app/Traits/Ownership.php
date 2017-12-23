@@ -2,6 +2,8 @@
 
 namespace App\Traits;
 
+use Illuminate\Database\Eloquent\Model;
+
 trait Ownership
 {
     /**
@@ -13,6 +15,6 @@ trait Ownership
      */
     public function owns(Model $model, $id = 'user_id')
     {
-        return $this->id === $model->{$id};
+        return $this->id === $model->{$id} || $this->is_superadmin;
     }
 }

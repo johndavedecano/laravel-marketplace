@@ -3,7 +3,7 @@
 namespace App\Http\Requests;
 
 use App\Post;
-use Illuminate\Foundation\Http\FormRequest;
+use Dingo\Api\Http\FormRequest;
 
 class PostUpdateRequest extends FormRequest
 {
@@ -14,15 +14,7 @@ class PostUpdateRequest extends FormRequest
      */
     public function authorize()
     {
-        $user = auth()->guard()->user();
-
-        if ($user->is_superadmin) {
-            return true;
-        }
-
-        $post = Post::findOrFail($this->get('id'));
-
-        return $user->owns($post);
+        return true;
     }
 
     /**
@@ -36,7 +28,11 @@ class PostUpdateRequest extends FormRequest
             'location_id' => 'required|exists:locations,id',
             'title' => 'required|max:140',
             'description' => 'required|max:10000',
-            'price' => 'required|numeric'
+            'price' => 'required|numeric',
+            'images' => 'required|array|min:1|max:3',
+            'images.*' => 'required|numeric|exists:images,id',
+            'category' => 'required|numeric|exists:categories,id',
+            'status' => 'in:active,draft',
         ];
     }
 }
