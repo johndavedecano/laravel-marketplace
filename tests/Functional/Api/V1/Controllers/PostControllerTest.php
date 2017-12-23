@@ -52,6 +52,7 @@ class PostControllerTest extends TestCase
         $this->category = Category::create(['name' => 'test']);
 
         $this->image = Image::create([
+            'user_id' => $this->user->id,
             'default' => 'https://d3iw72m71ie81c.cloudfront.net/male-67.jpg',
             'medium' => 'https://d3iw72m71ie81c.cloudfront.net/male-67.jpg',
             'thumbnail' => 'https://d3iw72m71ie81c.cloudfront.net/male-67.jpg',

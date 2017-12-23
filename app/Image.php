@@ -20,6 +20,7 @@ class Image extends Model
      * @var array
      */
     protected $fillable = [
+        'user_id',
         'default',
         'medium',
         'thumbnail',

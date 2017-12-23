@@ -14,7 +14,8 @@
         "bosnadev/repositories": " 0.*",
         "fzaninotto/faker": "^1.7",
         "cviebrock/eloquent-sluggable": "^4.3",
-        "doctrine/dbal": "^2.6"
+        "doctrine/dbal": "^2.6",
+        "intervention/image": "^2.4"
     },
     "require-dev": {
         "mockery/mockery": "0.9.*",
