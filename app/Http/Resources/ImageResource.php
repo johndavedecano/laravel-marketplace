@@ -3,6 +3,7 @@
 namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\Resource;
+use Illuminate\Support\Facades\Storage;
 
 class ImageResource extends Resource
 {
@@ -14,6 +15,12 @@ class ImageResource extends Resource
      */
     public function toArray($request)
     {
-        return parent::toArray($request);
+        return [
+            "id" => $this->id,
+            "user_id" => $this->user_id,
+            "default" => $this->default,
+            "medium" => $this->medium,
+            "thumbnail" => $this->thumbnail,
+        ];
     }
 }

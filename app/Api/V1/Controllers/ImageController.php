@@ -25,12 +25,10 @@ class ImageController extends Controller
      * Instantiate a new controller instance
      *
      * @param ImageRepository $image
-     * @param Storage $storage
      */
-    public function __construct(ImageRepository $image, Storage $storage)
+    public function __construct(ImageRepository $image)
     {
         $this->image = $image;
-        $this->storage = $storage;
 
         $this->middleware('jwt.auth')->except(['index', 'show']);
         $this->middleware('auth:api')->except(['index', 'show']);
@@ -60,9 +58,11 @@ class ImageController extends Controller
             foreach ($request->file('image') as $image) {
                 $images[] = $this->process($image);
             }
+        } else {
+            $images[] = $this->process($request->file('image'));
         }
 
-        return response()->json(['data' => collect($images)]);
+        return ImageResource::collection(collect($images));
     }
 
     /**
@@ -73,16 +73,16 @@ class ImageController extends Controller
      */
     private function process($file)
     {
-        $originalName = date('YmdHis')."_original.".$file->extension();
-        $original = $this->upload($file, $originalName);
+        $originalName = uniqid()."_original.".$file->getClientOriginalExtension();
+        $original = $this->upload((string)Image::make($file->getRealPath())->encode(), $originalName);
         $medium = $this->uploadAndResize($file, 250, 250);
         $thumbnail = $this->uploadAndResize($file, 100, 100);
 
         return $this->image->create([
             'user_id' => auth()->guard()->user()->id,
-            'default' => $original,
-            'medium' => $medium,
-            'thumbnail' => $thumbnail,
+            'default' => "storage/images/$originalName",
+            'medium' => "storage/images/$medium",
+            'thumbnail' => "storage/images/$thumbnail",
         ]);
     }
 
@@ -101,9 +101,11 @@ class ImageController extends Controller
             $constraint->aspectRatio();
         });
 
-        $name = date('YmdHis')."_".$width."x".$height.".".$file->extension();
+        $name = uniqid()."_".$width."x".$height.".".$file->getClientOriginalExtension();
 
-        return $this->upload((string)$image->encode(), $name);
+        $this->upload((string)$image->encode(), $name);
+
+        return $name;
     }
 
     /**
@@ -115,7 +117,7 @@ class ImageController extends Controller
      */
     private function upload($file, $name)
     {
-        return $this->storage->put("images", $file, $name);
+        return Storage::put("public/images/$name", $file);
     }
 
     /**

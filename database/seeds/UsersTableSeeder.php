@@ -17,7 +17,8 @@ class UsersTableSeeder extends Seeder
         $user = new User([
             'name' => 'John Dave Decano',
             'email' => 'user@user.com',
-            'password' => '123456'
+            'password' => '123456',
+            'is_activated' => true,
         ]);
 
         $user->save();
