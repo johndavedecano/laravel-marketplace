@@ -118,7 +118,7 @@ class UserController extends Controller
         $this->authorize('update', $user);
 
         $user->update([
-            'email' => $request->get('email')
+            'email_update' => $request->get('email')
         ]);
 
         return new UserResource($this->user->findOrFail($id));

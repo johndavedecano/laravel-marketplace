@@ -15,25 +15,22 @@ class SignUpControllerTest extends TestCase
         $this->post('api/auth/signup', [
             'name' => 'Test User',
             'email' => 'test@email.com',
-            'password' => '123456'
+            'password' => '123456',
+            'password_confirmation' => '123456',
         ])->assertJson([
-            'status' => 'ok'
+            'status' => 'ok',
+            'message' => 'Activation code was successfully sent to your email.',
         ])->assertStatus(201);
     }
 
-    public function testSignUpSuccessfullyWithTokenRelease()
+    public function testBadPassword()
     {
-        Config::set('boilerplate.sign_up.release_token', true);
-
         $this->post('api/auth/signup', [
             'name' => 'Test User',
             'email' => 'test@email.com',
-            'password' => '123456'
-        ])->assertJsonStructure([
-            'status'
-        ])->assertJson([
-            'status' => 'ok'
-        ])->assertStatus(201);
+            'password' => '1234566',
+            'password_confirmation' => '123456',
+        ])->assertStatus(422);
     }
 
     public function testSignUpReturnsValidationError()

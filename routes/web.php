@@ -11,9 +11,13 @@
 |
 */
 
-Route::get('reset_password/{token}', ['as' => 'password.reset', function($token)
-{
+Route::get('reset_password/{token}', ['as' => 'password.reset', function ($token) {
     // implement your reset password route here!
+    return response()->json($token);
+}]);
+
+Route::get('activate/{token}', ['as' => 'user.activation', function ($token) {
+    return response()->json($token);
 }]);
 
 Route::get('/', function () {
