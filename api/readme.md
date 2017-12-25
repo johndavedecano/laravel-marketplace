@@ -1,34 +1,18 @@
-## Laravel Marketplace
+## Laravel Marketplace API
 
 Laravel marketplace is a classified or buy and sell application that allow users to post ads.
 
-It is built on top of three big guys:
-
-* JWT-Auth - [tymondesigns/jwt-auth](https://github.com/tymondesigns/jwt-auth)
-* Dingo API - [dingo/api](https://github.com/dingo/api)
-* Laravel-CORS [barryvdh/laravel-cors](http://github.com/barryvdh/laravel-cors)
-
-What I made is really simple: an integration of these three packages and a setup of some authentication and credentials recovery methods.
-
 ## Installation
 
-1. run `composer create-project johndavedecano/laravel-marketplace marketplace`;
-2. have a coffee, nothing to do here;
+1. First configure .env.example then save it to .env
+2. run `composer install`;
+3. have a coffee, nothing to do here;
 
-Once the project creation procedure will be completed, run the `php artisan migrate` command to install the required tables.
+Once the project creation procedure will be completed, run the `php artisan migrate && php artisan db:seed` command to install the required tables.
 
 ## Usage
 
-I wrote a couple of articles on this project that explain how to write an entire sample application with this boilerplate. They cover the older version of this boilerplate, but all the concepts are the same. You can find them on Sitepoint:
-
 Just be aware that some options in the `config/boilerplate.php` file are changed, so take a look to it.
-
-* [How to Build an API-Only JWT-Powered Laravel App](https://www.sitepoint.com/how-to-build-an-api-only-jwt-powered-laravel-app/)
-* [How to Consume Laravel API with AngularJS](https://www.sitepoint.com/how-to-consume-laravel-api-with-angularjs/)
-
-**WARNING:** the articles are old and Laravel 5.1 related. Just use them as "inspiration". Even without updated tutorials, they should be enough.
-
-## Main Features
 
 ### A Ready-To-Use Authentication Controllers
 
