@@ -7,10 +7,12 @@ use App\Api\V1\Requests\LoginRequest;
 use App\Repositories\UserRepository;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\UserResource;
-use Illuminate\Auth\Access\AuthorizationException;
 use App\Http\Requests\UserProfileRequest;
 use App\Http\Requests\UserPasswordRequest;
 use App\Http\Requests\UserAccountRequest;
+use App\Mail\UserAccountUpdatedMail;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Auth\Access\AuthorizationException;
 
 /**
  * UserController
@@ -118,8 +120,11 @@ class UserController extends Controller
         $this->authorize('update', $user);
 
         $user->update([
-            'email_update' => $request->get('email')
+            'email_update' => $request->get('email'),
+            'activation_code' => str_random(40),
         ]);
+
+        Mail::to($user->email)->send(new UserAccountUpdatedMail($user));
 
         return new UserResource($this->user->findOrFail($id));
     }

@@ -180,4 +180,52 @@ class UserControllerTest extends TestCase
             ->assertJsonStructure(['data' => ['id', 'name', 'avatar']])
             ->assertStatus(200);
     }
+
+    public function testUpdateAccountSuccess()
+    {
+        $login = $this->login('test@email.com', '123456');
+
+        $headers = [
+            'Authorization' => 'Bearer ' . $login['token'],
+            'Content-Type' => 'x-www-form-urlencoded',
+        ];
+
+        $data = [
+            'email' => str_random(10).'@gmail.com',
+        ];
+
+        $response = $this
+            ->withHeaders($headers)
+            ->json(
+                'PUT',
+                '/api/users/'.$login['user']['id'].'/account',
+                $data
+            );
+        
+        $response->assertStatus(200);
+    }
+
+    public function testUpdateAccountFailure()
+    {
+        $login = $this->login('test@email.com', '123456');
+
+        $headers = [
+            'Authorization' => 'Bearer ' . $login['token'],
+            'Content-Type' => 'x-www-form-urlencoded',
+        ];
+
+        $data = [
+            'email' => 'test@email.com',
+        ];
+
+        $response = $this
+            ->withHeaders($headers)
+            ->json(
+                'PUT',
+                '/api/users/'.$login['user']['id'].'/account',
+                $data
+            );
+        
+        $response->assertStatus(422);
+    }
 }

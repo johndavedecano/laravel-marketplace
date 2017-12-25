@@ -23,10 +23,8 @@ class UserAccountRequest extends FormRequest
      */
     public function rules()
     {
-        $user_id = $this->route('user');
-
         return [
-            'email' => 'required|unique:users,email,'.$user_id,
+            'email' => 'required|unique:users,email'
         ];
     }
 }

@@ -1,6 +1,6 @@
 @component('mail::message')
 
-<p>Hello {{ $name }},<br/> Your are almost done!. <br/> Please activate your account to start using our service.</p>
+<p>Hello {{ $name }},<br/> Your are almost done!. <br/> {{ $message }}</p>
 
 @component('mail::button', ['url' => $actionUrl, 'color' => 'blue'])
 Activate Account

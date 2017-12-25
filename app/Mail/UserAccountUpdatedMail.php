@@ -8,15 +8,15 @@ use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
-class UserRegisteredMail extends Mailable implements ShouldQueue
+class UserAccountUpdatedMail extends Mailable implements ShouldQueue
 {
     use Queueable, SerializesModels;
-
+    
     /**
      * @var App\User $user
      */
     protected $user;
-
+    
     /**
      * Create a new message instance.
      *
@@ -28,7 +28,7 @@ class UserRegisteredMail extends Mailable implements ShouldQueue
     {
         $this->user = $user;
     }
-
+    
     /**
      * Build the message.
      *
@@ -36,10 +36,10 @@ class UserRegisteredMail extends Mailable implements ShouldQueue
      */
     public function build()
     {
-        return $this->markdown('emails.registered')->subject('Account Activation Required')->with([
+        return $this->markdown('emails.registered')->subject('Activation Required')->with([
             'name' => $this->user->name,
-            'actionUrl' => route('user.activation', ['token' => $this->user->activation_code]),
-            'message' => 'Please activate your account to start using our service.'
+            'actionUrl' => route('user.account_update', ['token' => $this->user->activation_code]),
+            'message' => 'You recently requested to make changes to your account. You can commit those changes by clicking the button below.'
         ]);
     }
 }

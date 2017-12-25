@@ -20,6 +20,10 @@ Route::get('activate/{token}', ['as' => 'user.activation', function ($token) {
     return response()->json($token);
 }]);
 
+Route::get('account_update/{token}', ['as' => 'user.account_update', function ($token) {
+    return response()->json($token);
+}]);
+
 Route::get('/', function () {
     return view('welcome');
 });
