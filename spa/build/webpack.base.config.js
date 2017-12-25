@@ -10,7 +10,7 @@ const VueI18n = require("vue-i18n")
 const config = require("../config")
 
 const messages = {
-	main:	require(`../i18n/${config.language.filename}`),
+	main: require(`../i18n/${config.language.filename}`),
 	fallback: config.fallbackLanguage ? require(`../i18n/${config.fallbackLanguage.filename}`) : null
 }
 
@@ -28,7 +28,9 @@ const commonPlugins = [
 		"PRODUCTION": config.isProduction,
 
 		"LANGUAGE_MAIN_FILENAME": JSON.stringify(config.language.filename),
-		"LANGUAGE_FALLBACK_FILENAME": config.fallbackLanguage ? JSON.stringify(config.fallbackLanguage.filename) : null,
+		"LANGUAGE_FALLBACK_FILENAME": config.fallbackLanguage
+			? JSON.stringify(config.fallbackLanguage.filename)
+			: null,
 		"LANGUAGE_ISRTL": config.language.isRTL
 	}),
 	new StyleLintPlugin({
@@ -37,29 +39,30 @@ const commonPlugins = [
 ]
 
 const doI18n = StringReplacePlugin.replace({
-	replacements: [{
-		pattern: /\$ts\((.+)\)/g,
-		replacement: function(fullMatch, params, offset, string) {
-			params = params.split(",").map((p) => eval(p))
-			if (i18n.tc(...params) === params[0]) {
-				// check if the translation key is defined
-				// We could have used i18n.te but it does not account for fallback languages
-				// We are using this instead. Uglier but does the job
-				if (config.isProduction) {
-					throw new Error(`[i18n] Translation key "${params[0]}" does not exist`)
-				} else { // just warn in development mode
-					console.warn(`[i18n] Translation key "${params[0]}" does not exist`)
+	replacements: [
+		{
+			pattern: /\$ts\((.+)\)/g,
+			replacement: function(fullMatch, params, offset, string) {
+				params = params.split(",").map((p) => eval(p))
+				if (i18n.tc(...params) === params[0]) {
+					// check if the translation key is defined
+					// We could have used i18n.te but it does not account for fallback languages
+					// We are using this instead. Uglier but does the job
+					if (config.isProduction) {
+						throw new Error(`[i18n] Translation key "${params[0]}" does not exist`)
+					} else {
+						// just warn in development mode
+						console.warn(`[i18n] Translation key "${params[0]}" does not exist`)
+					}
 				}
+				return i18n.tc(...params)
 			}
-			return i18n.tc(...params)
 		}
-	}]
+	]
 })
 
 module.exports = {
-	devtool: config.isProduction
-		? false
-		: "inline-source-map",
+	devtool: config.isProduction ? false : "inline-source-map",
 
 	entry: {
 		app: "./src/entry-client.js"
@@ -73,21 +76,21 @@ module.exports = {
 
 	resolve: {
 		alias: {
-			"static": path.resolve(__dirname, "../static"),
-			"src": path.resolve(__dirname, "../src"),
-			"components": path.resolve(__dirname, "../src/components"),
-			"images": path.resolve(__dirname, "../src/images"),
-			"router": path.resolve(__dirname, "../src/router"),
-			"store": path.resolve(__dirname, "../src/store"),
-			"styles": path.resolve(__dirname, "../src/styles"),
-			"mixins": path.resolve(__dirname, "../src/mixins"),
-			"views": path.resolve(__dirname, "../src/views")
+			static: path.resolve(__dirname, "../static"),
+			src: path.resolve(__dirname, "../src"),
+			components: path.resolve(__dirname, "../src/components"),
+			images: path.resolve(__dirname, "../src/images"),
+			router: path.resolve(__dirname, "../src/router"),
+			store: path.resolve(__dirname, "../src/store"),
+			styles: path.resolve(__dirname, "../src/styles"),
+			mixins: path.resolve(__dirname, "../src/mixins"),
+			views: path.resolve(__dirname, "../src/views")
 		},
-    extensions: ['.js', '.vue', '.scss']
+		extensions: [".js", ".vue", ".scss"]
 	},
 	resolveLoader: {
 		alias: {
-			'scss-loader': 'sass-loader'
+			"scss-loader": "sass-loader"
 		}
 	},
 	module: {
@@ -108,10 +111,7 @@ module.exports = {
 						html: doI18n
 					},
 					preserveWhitespace: false,
-					postcss: [
-						require("autoprefixer")({browsers: ["last 3 versions"]}),
-						require("cssnano")
-					]
+					postcss: [require("autoprefixer")({ browsers: ["last 3 versions"] }), require("cssnano")]
 				}
 			},
 			{
@@ -139,7 +139,5 @@ module.exports = {
 		hints: config.isProduction ? "warning" : false
 	},
 
-	plugins: config.isProduction ? commonPlugins : commonPlugins.concat([
-		new FriendlyErrorsPlugin()
-	])
+	plugins: config.isProduction ? commonPlugins : commonPlugins.concat([new FriendlyErrorsPlugin()])
 }

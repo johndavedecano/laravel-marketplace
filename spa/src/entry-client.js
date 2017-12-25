@@ -10,7 +10,9 @@ Vue.mixin({
 			asyncData({
 				store: this.$store,
 				route: to
-			}).then(next).catch(next)
+			})
+				.then(next)
+				.catch(next)
 		} else {
 			next()
 		}
@@ -40,18 +42,22 @@ router.onReady(() => {
 		if (store.state.error) store.commit("CLEAR_ERROR")
 
 		const activated = matched.filter((component, i) => {
-			return diffed || (diffed = (prevMatched[i] !== component))
+			return diffed || (diffed = prevMatched[i] !== component)
 		})
 		if (!activated.length) {
 			return next()
 		}
-		Promise.all(activated.map((c) => {
-			if (c.asyncData) {
-				return c.asyncData({ store, route: to })
-			}
-		})).then(() => {
-			next()
-		}).catch(next)
+		Promise.all(
+			activated.map((c) => {
+				if (c.asyncData) {
+					return c.asyncData({ store, route: to })
+				}
+			})
+		)
+			.then(() => {
+				next()
+			})
+			.catch(next)
 	})
 
 	// actually mount to DOM

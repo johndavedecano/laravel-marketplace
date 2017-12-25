@@ -46,16 +46,14 @@ if (config.isProduction) {
 			filename: "service-worker.js",
 			minify: true,
 
-			staticFileGlobs: [
-				"dist/**.css",
-				"dist/**.js",
-				"dist/img/**/*"
-			],
+			staticFileGlobs: ["dist/**.css", "dist/**.js", "dist/img/**/*"],
 
-			runtimeCaching: [{
-				urlPattern: /\/.*/,
-				handler: "networkFirst"
-			}],
+			runtimeCaching: [
+				{
+					urlPattern: /\/.*/,
+					handler: "networkFirst"
+				}
+			],
 
 			dontCacheBustUrlsMatching: /./,
 			navigateFallback: "/"
@@ -63,7 +61,7 @@ if (config.isProduction) {
 	)
 }
 
-if(!config.isTesting) {
+if (!config.isTesting) {
 	clientConfig.plugins.push(
 		// extract vendor chunks for better caching
 		// https://github.com/Narkoleptika/webpack-everything/commit/b7902f60806cf40b9d1abf8d6bb2a094d924fff7
@@ -80,10 +78,8 @@ if(!config.isTesting) {
 	)
 }
 
-if(config.isProduction) {
-	clientConfig.plugins.push(
-			new webpack.optimize.ModuleConcatenationPlugin()
-	)
+if (config.isProduction) {
+	clientConfig.plugins.push(new webpack.optimize.ModuleConcatenationPlugin())
 }
 
 module.exports = clientConfig

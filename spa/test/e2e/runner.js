@@ -1,5 +1,5 @@
 // 1. start the dev server using production config
-var server = require("../../server.js")
+let server = require("../../server.js")
 
 server.ready.then(() => {
 	// 2. run the nightwatch test suite against it
@@ -9,7 +9,7 @@ server.ready.then(() => {
 	// or override the environment flag, for example: `npm run e2e -- --env chrome,firefox`
 	// For more information on Nightwatch"s config file, see
 	// http://nightwatchjs.org/guide#settings-file
-	var opts = process.argv.slice(2)
+	let opts = process.argv.slice(2)
 	if (opts.indexOf("--config") === -1) {
 		opts = opts.concat(["--config", "test/e2e/nightwatch.conf.js"])
 	}
@@ -17,15 +17,15 @@ server.ready.then(() => {
 		opts = opts.concat(["--env", "phantomjs"])
 	}
 
-	var spawn = require("cross-spawn")
-	var runner = spawn("./node_modules/.bin/nightwatch", opts, { stdio: "inherit" })
+	let spawn = require("cross-spawn")
+	let runner = spawn("./node_modules/.bin/nightwatch", opts, { stdio: "inherit" })
 
-	runner.on("exit", function (code) {
+	runner.on("exit", function(code) {
 		server.close()
 		process.exit(code)
 	})
 
-	runner.on("error", function (err) {
+	runner.on("error", function(err) {
 		server.close()
 		throw err
 	})

@@ -7,7 +7,6 @@ import { createRouter } from "./router"
 
 import App from "./App.vue"
 
-
 import metaInfo from "./mixins/metaInfo"
 Vue.mixin(metaInfo)
 
@@ -17,7 +16,7 @@ Vue.use(VueI18n)
 // we use "primaryLanguage" as a key because it does not really matter
 // we can do this since the file is loaded using the `LANGUAGE_FILENAME` key
 const messages = {
-	"main": require(`./../i18n/${LANGUAGE_MAIN_FILENAME}.json`)
+	main: require(`./../i18n/${LANGUAGE_MAIN_FILENAME}.json`)
 }
 const i18n = new VueI18n({
 	locale: "main",
@@ -51,4 +50,3 @@ export function createApp(ssrContext) {
 	// different depending on whether we are in a browser or on the server.
 	return { app, router, store }
 }
-

@@ -20,5 +20,4 @@ export const mutations = {
 	CLEAR_ERROR(state) {
 		state.error = null
 	}
-
 }

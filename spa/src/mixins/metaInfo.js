@@ -1,9 +1,7 @@
 function getMeta(vm) {
 	const { meta } = vm.$options
 	if (meta) {
-		return typeof meta === "function"
-			? meta.call(vm)
-			: meta
+		return typeof meta === "function" ? meta.call(vm) : meta
 	} else {
 		return null
 	}
@@ -23,12 +21,9 @@ const clientMetaInfoMixin = {
 		const meta = getMeta(this)
 		if (meta) {
 			document.title = `${meta.title} - SiteName`
-			document.querySelector("meta[name=description]")
-				.setAttribute("content", meta.description)
+			document.querySelector("meta[name=description]").setAttribute("content", meta.description)
 		}
 	}
 }
 
-export default process.env.VUE_ENV === "server"
-	? serverMetaInfoMixin
-	: clientMetaInfoMixin
+export default (process.env.VUE_ENV === "server" ? serverMetaInfoMixin : clientMetaInfoMixin)

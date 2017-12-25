@@ -9,9 +9,7 @@ Vue.use(Router)
 import Home from "views/Home" // include in the main bundle
 const NotFound = () => System.import("views/NotFound") // load dynamically when needed
 
-let routes = [
-	{ path: "/", component: Home }
-]
+let routes = [{ path: "/", component: Home }]
 
 if (process.env.NODE_ENV !== "production") {
 	const Showcase = () => System.import("views/Showcase")
