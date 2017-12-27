@@ -21,7 +21,7 @@
           <b-form-input id="password"
                         type="password"
                         required
-                        placeholder="secret">
+                        placeholder="">
           </b-form-input>
         </b-form-group>
 

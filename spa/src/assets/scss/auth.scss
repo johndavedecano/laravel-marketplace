@@ -1,5 +1,9 @@
 .auth {
   padding: 2rem;
+
+  .card {
+    box-shadow: $box-shadow;
+  }
 }
 
 .auth-links {

@@ -2,7 +2,7 @@ const state = {
   isLoggedIn: false,
   isLoading: false,
   token: null,
-  user: {}
+  user: null
 }
 
 const actions = {}
