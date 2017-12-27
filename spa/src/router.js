@@ -1,5 +1,5 @@
-import welcome from './views/welcome.vue'
-import about from './views/about.vue'
+import Home from './views/Home.vue'
+import About from './views/About.vue'
 import NotFound from './views/NotFound.vue'
 
 export default {
@@ -7,8 +7,8 @@ export default {
   base: '/',
   linkActiveClass: 'active',
   routes: [
-    { path: '/', component: welcome },
-    { path: '/about', component: about },
+    { path: '/', component: Home },
+    { path: '/about', component: About },
     { path: '*', component: NotFound }
   ]
 }

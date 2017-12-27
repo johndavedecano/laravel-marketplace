@@ -1,10 +1,8 @@
 <script>
 import navComponent from './components/header/nav.vue';
 import logo from 'images/logo.png';
-import store from './state';
 
 export default {
-  store,
   components: {
     navComponent,
   },
