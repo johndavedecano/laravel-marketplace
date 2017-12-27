@@ -5,7 +5,7 @@ import BootstrapVue from 'bootstrap-vue'
 import { sync } from 'vuex-router-sync'
 import axios from 'axios'
 
-import app from 'src/app.vue'
+import App from 'src/App.vue'
 import routerList from './router'
 import store from './store'
 
@@ -30,5 +30,5 @@ sync(store, router)
 new Vue({
   store,
   router,
-  render: h => h(app)
+  render: h => h(App)
 }).$mount('#app')

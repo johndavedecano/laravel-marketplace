@@ -12,10 +12,8 @@ export default {
 <template>
   <div id="app">
     <navComponent />
-    <main role="main" class="main">
-      <transition name="fade" mode="out-in" appear>
-        <router-view></router-view>
-      </transition>
-    </main>
+    <transition name="fade" mode="out-in" appear>
+      <router-view></router-view>
+    </transition>
   </div>
 </template>
