@@ -1,3 +1,11 @@
+<script>
+export default {
+  metaInfo: {
+    title: 'Page Not Found',
+  },
+};
+</script>
+
 <template>
   <div class="container">
     <h3>Page Not Found</h3>

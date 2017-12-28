@@ -1,3 +1,11 @@
+<script>
+export default {
+  metaInfo: {
+    title: 'Forgot Password',
+  },
+};
+</script>
+
 <template>
   <div class="card">
     <h4 class="card-header">Forgot Password</h4>

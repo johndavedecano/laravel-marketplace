@@ -1,9 +1,11 @@
 import Vue from 'vue'
-import VueRouter from 'vue-router'
+import VueBootstrap from 'bootstrap-vue'
 import VueAxios from 'vue-axios'
-import BootstrapVue from 'bootstrap-vue'
-import { sync } from 'vuex-router-sync'
+import VueRouter from 'vue-router'
+import VueMeta from 'vue-meta'
+
 import axios from 'axios'
+import { sync } from 'vuex-router-sync'
 
 import App from 'src/App.vue'
 import routerList from './router'
@@ -12,9 +14,10 @@ import store from './store'
 import 'scss/style.scss'
 
 // Registry
-Vue.use(BootstrapVue)
+Vue.use(VueBootstrap)
 Vue.use(VueRouter)
 Vue.use(VueAxios, axios)
+Vue.use(VueMeta)
 
 /**
  * Create vue router intance

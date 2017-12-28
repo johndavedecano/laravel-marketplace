@@ -1,3 +1,11 @@
+<script>
+export default {
+  metaInfo: {
+    title: 'About Us',
+  },
+};
+</script>
+
 <template>
   <div class="about container">
     <h3>About Us</h3>

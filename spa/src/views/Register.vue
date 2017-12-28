@@ -1,3 +1,11 @@
+<script>
+export default {
+  metaInfo: {
+    title: 'Register',
+  },
+};
+</script>
+
 <template>
   <div class="card">
     <h4 class="card-header">Registration</h4>

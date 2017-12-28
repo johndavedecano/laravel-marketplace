@@ -1,3 +1,11 @@
+<script>
+export default {
+  metaInfo: {
+    title: 'Login',
+  },
+};
+</script>
+
 <template>
   <div class="card">
     <h4 class="card-header">Account Login</h4>
