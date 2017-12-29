@@ -4,17 +4,17 @@
       <template slot="button-content">
         <span>Access Account</span>
       </template>
-      <router-link role="menuitem" class="dropdown-item" to="/auth/login">Login</router-link>
-      <router-link role="menuitem" class="dropdown-item" to="/auth/register">Register</router-link>
+      <router-link role="menuitem" class="dropdown-item" to="/auth/login" exact>Login</router-link>
+      <router-link role="menuitem" class="dropdown-item" to="/auth/register" exact>Register</router-link>
     </b-nav-item-dropdown>
 
     <b-nav-item-dropdown right v-if="isLoggedIn">
       <template slot="button-content">
         <span>Welcome, {{ user ? user.name : 'User' }}</span>
       </template>
-      <router-link role="menuitem" class="dropdown-item" to="/account">Account</router-link>
-      <router-link role="menuitem" class="dropdown-item" to="/profile">Profile</router-link>
-      <router-link role="menuitem" class="dropdown-item" to="/posts">Posts</router-link>
+      <router-link role="menuitem" class="dropdown-item" to="/account" exact>Account</router-link>
+      <router-link role="menuitem" class="dropdown-item" to="/account/profile" exact>Profile</router-link>
+      <router-link role="menuitem" class="dropdown-item" to="/account/posts" exact>Posts</router-link>
       <b-dropdown-item href="#" @click.prevent="logout">Logout</b-dropdown-item>
     </b-nav-item-dropdown>
   </b-navbar-nav>
