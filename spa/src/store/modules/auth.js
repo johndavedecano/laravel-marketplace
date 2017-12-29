@@ -4,8 +4,7 @@ import * as types from './types'
 const state = {
   isLoggedIn: false,
   isLoading: false,
-  user: null,
-  token: null
+  user: null
 }
 
 const mutations = {
@@ -16,21 +15,24 @@ const mutations = {
     state.isLoading = false
     state.isLoggedIn = false
   },
-  [types.AUTH_LOGIN_SUCCESS]: state => {
+  [types.AUTH_LOGIN_SUCCESS]: (state, { user, token }) => {
     state.isLoggedIn = true
     state.isLoading = false
+    state.user = user
+    localStorage.setItem('token', token)
   },
   [types.AUTH_LOGOUT]: state => {
     state.isLoggedIn = false
+    localStorage.removeItem('token')
   }
 }
 
 const actions = {
-  login: async ({ state, commit, dispatch }, data) => {
+  login: async ({ state, commit, dispatch }, params) => {
     commit(types.AUTH_LOGIN)
     try {
-      await axios.post('/api/auth/login', data)
-      commit(types.AUTH_LOGIN_SUCCESS)
+      const { data } = await axios.post('/api/auth/login', params)
+      commit(types.AUTH_LOGIN_SUCCESS, data)
       dispatch('showNotification', {
         type: 'success',
         message: 'Successfully logged in'

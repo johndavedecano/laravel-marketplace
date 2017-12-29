@@ -19,8 +19,8 @@ export default {
     },
   },
   computed: {
-    isLoading() {
-      return this.$store.getters.isLogginIn;
+    isLoggingIn() {
+      return this.$store.getters.isLoggingIn;
     },
   },
   metaInfo: {
@@ -58,7 +58,10 @@ export default {
         </b-form-group>
 
         <div class="auth-buttons">
-          <b-button type="submit" variant="primary" block>Submit</b-button>
+          <b-button type="submit"
+            variant="primary"
+            :disabled="isLoggingIn === true"
+            block>{{ isLoggingIn ? 'Please Wait...' : 'Submit'}}</b-button>
         </div>
 
         <div class="auth-links">
