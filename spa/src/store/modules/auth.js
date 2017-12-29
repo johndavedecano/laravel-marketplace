@@ -46,6 +46,16 @@ const actions = {
       })
       return Promise.reject(error.message)
     }
+  },
+  logout: ({ state, commit, dispatch }) => {
+    return new Promise(resolve => {
+      dispatch('showNotification', {
+        type: 'success',
+        message: 'Successfully logged out'
+      })
+      commit(types.AUTH_LOGOUT)
+      resolve()
+    })
   }
 }
 

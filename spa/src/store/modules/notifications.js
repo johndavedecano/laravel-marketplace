@@ -10,10 +10,11 @@ const toastTypes = {
 
 miniToastr.init({ types: toastTypes }) // config can be passed here miniToastr.init(config)
 
-// Here we are seting up messages output to `mini-toastr`
-// This mean that in case of 'success' message we will call miniToastr.success(message, title, timeout, cb)
-// In case of 'error' we will call miniToastr.error(message, title, timeout, cb)
-// and etc.
+/**
+ * Adapter for calling mini toaster
+ *
+ * @param {object} meta
+ */
 function toast ({ title, message, type, timeout, cb }) {
   return miniToastr[type](message, title, timeout, cb)
 }
