@@ -33,6 +33,18 @@ Vue.use(VueMeta)
  */
 const router = new VueRouter(routerList)
 
+router.beforeEach((to, from, next) => {
+  if (to.meta.requireAuth && !store.state.auth.isLoggedIn) {
+    store.dispatch('showNotification', {
+      type: 'error',
+      message: 'You must be logged in to access this page.'
+    })
+    next({ path: '/auth/login' })
+  } else {
+    next()
+  }
+})
+
 /**
  * Sync router to store
  */
