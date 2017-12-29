@@ -19,7 +19,9 @@ const mutations = {
     state.isLoggedIn = true
     state.isLoading = false
     state.user = user
+
     localStorage.setItem('token', token)
+    axios.defaults.headers.common['Authorization'] = `Bearer ${token}`
   },
   [types.AUTH_LOGOUT]: state => {
     state.isLoggedIn = false
