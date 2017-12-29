@@ -1,5 +1,28 @@
 <script>
 export default {
+  data() {
+    return {
+      email: '',
+      password: '',
+    };
+  },
+  methods: {
+    onSubmit() {
+      this.$store
+        .dispatch('login', {
+          email: this.email,
+          password: this.password,
+        })
+        .then(() => {
+          this.$router.push('/');
+        });
+    },
+  },
+  computed: {
+    isLoading() {
+      return this.$store.getters.isLogginIn;
+    },
+  },
   metaInfo: {
     title: 'Login',
   },
@@ -10,14 +33,14 @@ export default {
   <div class="card">
     <h4 class="card-header">Account Login</h4>
     <div class="card-body">
-      <b-form>
+      <b-form @submit.prevent="onSubmit">
         <b-form-group id="emailGroup"
                     label="Email address:"
                     label-for="email">
           <b-form-input id="email"
                         type="email"
                         required
-                        :state="false"
+                        v-model="email"
                         placeholder="Enter email">
           </b-form-input>
           <b-form-invalid-feedback></b-form-invalid-feedback>
@@ -29,6 +52,7 @@ export default {
           <b-form-input id="password"
                         type="password"
                         required
+                        v-model="password"
                         placeholder="">
           </b-form-input>
         </b-form-group>

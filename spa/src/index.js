@@ -6,12 +6,21 @@ import VueMeta from 'vue-meta'
 
 import axios from 'axios'
 import { sync } from 'vuex-router-sync'
+import env from './../env'
 
 import App from 'src/App.vue'
 import routerList from './router'
 import store from './store'
 
 import 'scss/style.scss'
+
+// Configure Axios
+axios.defaults.baseURL = env.API_HOST
+axios.defaults.headers.put['Content-Type'] = 'application/x-www-form-urlencoded'
+axios.defaults.headers.post['Content-Type'] = 'multipart/form-data'
+axios.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem(
+  'token'
+)}`
 
 // Registry
 Vue.use(VueBootstrap)
