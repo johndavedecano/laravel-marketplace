@@ -13,8 +13,11 @@
         <span>Welcome, {{ user ? user.name : 'User' }}</span>
       </template>
       <router-link role="menuitem" class="dropdown-item" to="/account" exact>Dashboard</router-link>
-      <router-link role="menuitem" class="dropdown-item" to="/account/profile" exact>Account Settings</router-link>
       <router-link role="menuitem" class="dropdown-item" to="/account/posts" exact>Manage Posts</router-link>
+      <router-link role="menuitem" class="dropdown-item" to="/account/messages" exact>Messages</router-link>
+      <router-link role="menuitem" class="dropdown-item" to="/account/notifications" exact>Notifications</router-link>
+      <router-link role="menuitem" class="dropdown-item" to="/account/profile" exact>Account</router-link>
+      <router-link role="menuitem" class="dropdown-item" to="/account/settings" exact>Settings</router-link>
       <b-dropdown-item href="#" @click.prevent="logout">Logout</b-dropdown-item>
     </b-nav-item-dropdown>
   </b-navbar-nav>
