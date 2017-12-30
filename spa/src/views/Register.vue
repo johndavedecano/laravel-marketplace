@@ -93,7 +93,7 @@ export default {
 
         <div class="auth-links">
           <router-link to="/auth/forgot">Forgot Password</router-link> or
-          <router-link to="/auth/register">Register Account</router-link>
+          <router-link to="/auth/login">Existing Account</router-link>
         </div>
       </b-form>
     </div>
