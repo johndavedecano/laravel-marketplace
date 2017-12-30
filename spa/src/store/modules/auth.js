@@ -26,6 +26,15 @@ const mutations = {
   [types.AUTH_LOGOUT]: state => {
     state.isLoggedIn = false
     localStorage.removeItem('token')
+  },
+  [types.AUTH_REGISTER]: state => {
+    state.isLoading = true
+  },
+  [types.AUTH_REGISTER_FAILED]: state => {
+    state.isLoading = false
+  },
+  [types.AUTH_REGISTER_SUCCESS]: (state, { user, token }) => {
+    state.isLoading = false
   }
 }
 
@@ -41,12 +50,13 @@ const actions = {
       })
       return Promise.resolve()
     } catch (error) {
+      const { response } = error
       commit(types.AUTH_LOGIN_FAILED)
       dispatch('showNotification', {
         type: 'error',
-        message: 'Invalid username or password'
+        message: response.data.error.message
       })
-      return Promise.reject(error.message)
+      return Promise.reject(error)
     }
   },
   logout: ({ state, commit, dispatch }) => {
@@ -58,11 +68,31 @@ const actions = {
       commit(types.AUTH_LOGOUT)
       resolve()
     })
+  },
+  register: async ({ state, commit, dispatch }, params) => {
+    commit(types.AUTH_REGISTER)
+    try {
+      const { data } = await axios.post('/api/auth/signup', params)
+      commit(types.AUTH_REGISTER_SUCCESS, data)
+      dispatch('showNotification', {
+        type: 'success',
+        message: 'Success, please check your email address!'
+      })
+      return Promise.resolve()
+    } catch (error) {
+      commit(types.AUTH_REGISTER_FAILED)
+      console.log(error)
+      dispatch('showNotification', {
+        type: 'error',
+        message: 'Registration failed'
+      })
+      return Promise.reject(error)
+    }
   }
 }
 
 const getters = {
-  isLoggingIn: state => state.isLoading,
+  isLoading: state => state.isLoading,
   isLoggedIn: state => state.isLoggedIn,
   currentUser: state => state.user,
   token: state => state.token

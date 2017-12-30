@@ -1,5 +1,32 @@
 <script>
 export default {
+  data() {
+    return {
+      name: '',
+      email: '',
+      password: '',
+      password_confirmation: '',
+    };
+  },
+  methods: {
+    onSubmit() {
+      this.$store
+        .dispatch('register', {
+          name: this.name,
+          email: this.email,
+          password: this.password,
+          password_confirmation: this.password_confirmation,
+        })
+        .then(() => {
+          this.$router.push('/');
+        });
+    },
+  },
+  computed: {
+    isLoading() {
+      return this.$store.getters.isLoading;
+    },
+  },
   metaInfo: {
     title: 'Register',
   },
@@ -10,13 +37,14 @@ export default {
   <div class="card">
     <h4 class="card-header">Registration</h4>
     <div class="card-body">
-      <b-form>
+      <b-form @submit.prevent="onSubmit">
         <b-form-group id="name"
                     label="Full name:"
                     label-for="name">
           <b-form-input id="name"
                         type="text"
                         required
+                        v-model="name"
                         placeholder="Enter name">
           </b-form-input>
           <b-form-invalid-feedback></b-form-invalid-feedback>
@@ -28,6 +56,7 @@ export default {
           <b-form-input id="email"
                         type="email"
                         required
+                        v-model="email"
                         placeholder="Enter email">
           </b-form-input>
           <b-form-invalid-feedback></b-form-invalid-feedback>
@@ -39,6 +68,7 @@ export default {
           <b-form-input id="password"
                         type="password"
                         required
+                        v-model="password"
                         placeholder="">
           </b-form-input>
         </b-form-group>
@@ -49,12 +79,16 @@ export default {
           <b-form-input id="password_confirmation"
                         type="password"
                         required
+                        v-model="password_confirmation"
                         placeholder="">
           </b-form-input>
         </b-form-group>
 
         <div class="auth-buttons">
-          <b-button type="submit" variant="primary" block>Submit</b-button>
+          <b-button type="submit"
+                variant="primary"
+                :disabled="isLoading === true"
+                block>{{ isLoading ? 'Please Wait...' : 'Submit'}}</b-button>
         </div>
 
         <div class="auth-links">
