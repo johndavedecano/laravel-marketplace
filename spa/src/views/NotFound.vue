@@ -7,7 +7,11 @@ export default {
 </script>
 
 <template>
-  <div class="container">
-    <h3>Page Not Found</h3>
-  </div>
+  <page title="404" subtitle="Page Not Found">
+    <div class="row">
+      <div class="col-md-12">
+        <p>The page that you are trying to access does not exists.</p>
+      </div>
+    </div>
+  </page>
 </template>
