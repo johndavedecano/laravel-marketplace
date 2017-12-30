@@ -1,13 +1,13 @@
 <script>
 export default {
   metaInfo: {
-    title: 'Manage Posts',
+    title: 'Contact Us',
   },
 };
 </script>
 
 <template>
-  <page title="Manage Posts">
-    <account-sidebar />
+  <page title="Contact Us">
+
   </page>
 </template>
