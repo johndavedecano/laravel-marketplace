@@ -1,5 +1,6 @@
 import axios from 'axios'
 import * as types from './types'
+import errorFormatter from './../../helpers/errorFormatter'
 
 const state = {
   isLoggedIn: false,
@@ -50,11 +51,11 @@ const actions = {
       })
       return Promise.resolve()
     } catch (error) {
-      const { response } = error
+      const { message } = errorFormatter(error)
       commit(types.AUTH_LOGIN_FAILED)
       dispatch('showNotification', {
         type: 'error',
-        message: response.data.error.message
+        message
       })
       return Promise.reject(error)
     }
@@ -80,11 +81,11 @@ const actions = {
       })
       return Promise.resolve()
     } catch (error) {
-      commit(types.AUTH_REGISTER_FAILED)
-      console.log(error)
+      const { errorsArray, status, message } = errorFormatter(error)
+      commit(types.AUTH_REGISTER_FAILED, {})
       dispatch('showNotification', {
         type: 'error',
-        message: 'Registration failed'
+        title: status === 422 ? errorsArray[0] : message
       })
       return Promise.reject(error)
     }
