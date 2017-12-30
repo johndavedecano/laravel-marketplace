@@ -18,9 +18,12 @@ import 'scss/style.scss'
 axios.defaults.baseURL = env.API_HOST
 axios.defaults.headers.put['Content-Type'] = 'application/x-www-form-urlencoded'
 axios.defaults.headers.post['Content-Type'] = 'multipart/form-data'
-axios.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem(
-  'token'
-)}`
+
+if (localStorage.getItem('token')) {
+  axios.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem(
+    'token'
+  )}`
+}
 
 // Registry
 Vue.use(VueBootstrap)
