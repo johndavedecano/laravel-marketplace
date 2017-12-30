@@ -16,6 +16,7 @@ import PostsSubmit from './views/PostsSubmit.vue'
 import PostsUserManager from './views/PostsUserManager.vue'
 import Profile from './views/Profile.vue'
 import Register from './views/Register.vue'
+import Settings from './views/Settings.vue'
 // Todo use code splitting later.
 
 export default {
@@ -51,6 +52,11 @@ export default {
     {
       path: '/account/notifications',
       component: Notifications,
+      meta: { requireAuth: true }
+    },
+    {
+      path: '/account/settings',
+      component: Settings,
       meta: { requireAuth: true }
     },
     {
