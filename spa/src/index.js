@@ -11,6 +11,7 @@ import env from './../env'
 import App from 'src/App.vue'
 import routerList from './router'
 import store from './store'
+import registerComponents from './registerComponents'
 
 import 'scss/style.scss'
 
@@ -20,9 +21,8 @@ axios.defaults.headers.put['Content-Type'] = 'application/x-www-form-urlencoded'
 axios.defaults.headers.post['Content-Type'] = 'multipart/form-data'
 
 if (localStorage.getItem('token')) {
-  axios.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem(
-    'token'
-  )}`
+  const Bearer = `Bearer ${localStorage.getItem('token')}`
+  axios.defaults.headers.common['Authorization'] = Bearer
 }
 
 // Registry
@@ -52,6 +52,11 @@ router.beforeEach((to, from, next) => {
  * Sync router to store
  */
 sync(store, router)
+
+/**
+ * Register Global Components
+ */
+registerComponents(Vue)
 
 /* eslint-disable no-new */
 new Vue({
