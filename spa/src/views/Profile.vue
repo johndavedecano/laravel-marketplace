@@ -8,6 +8,8 @@ export default {
 
 <template>
   <page title="Manage Account">
-    <account-sidebar />
+    <div class="row">
+      <account-sidebar />
+    </div>
   </page>
 </template>
