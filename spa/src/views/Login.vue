@@ -20,7 +20,7 @@ export default {
   },
   computed: {
     isLoggingIn() {
-      return this.$store.getters.isLoggingIn;
+      return this.$store.getters.isLoading;
     },
   },
   metaInfo: {
