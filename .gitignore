@@ -1,3 +1,11 @@
 node_modules
 .idea
 .vscode
+api/node_modules
+api/public/storage
+api/storage/*.key
+api/vendor
+Homestead.json
+Homestead.yaml
+.env
+
