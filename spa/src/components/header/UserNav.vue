@@ -12,9 +12,9 @@
       <template slot="button-content">
         <span>Welcome, {{ user ? user.name : 'User' }}</span>
       </template>
-      <router-link role="menuitem" class="dropdown-item" to="/account" exact>Account</router-link>
-      <router-link role="menuitem" class="dropdown-item" to="/account/profile" exact>Profile</router-link>
-      <router-link role="menuitem" class="dropdown-item" to="/account/posts" exact>Posts</router-link>
+      <router-link role="menuitem" class="dropdown-item" to="/account" exact>Dashboard</router-link>
+      <router-link role="menuitem" class="dropdown-item" to="/account/profile" exact>Account Settings</router-link>
+      <router-link role="menuitem" class="dropdown-item" to="/account/posts" exact>Manage Posts</router-link>
       <b-dropdown-item href="#" @click.prevent="logout">Logout</b-dropdown-item>
     </b-nav-item-dropdown>
   </b-navbar-nav>
