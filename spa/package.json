@@ -11,6 +11,7 @@
     "vue-axios": "^2.0.2",
     "vue-build": "^2.2.0",
     "vue-meta": "^1.4.0",
+    "vue-select": "github:sagalbot/vue-select",
     "vuex": "^3.0.1",
     "vuex-persist": "^1.1.0",
     "vuex-persistedstate": "^2.4.2",
