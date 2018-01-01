@@ -7,10 +7,9 @@ export default {
 <template>
   <div class="container page">
     <!-- Page Heading/Breadcrumbs -->
-    <h1 class="mt-4 mb-3">{{ title }}
+    <h2 class="mt-4 mb-3">{{ title }}
       <small v-if="!!subtitle">{{ subtitle }}</small>
-    </h1>
-    <hr>
+    </h2>
     <slot></slot>
   </div>
 </template>
