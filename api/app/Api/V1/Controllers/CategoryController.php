@@ -40,6 +40,19 @@ class CategoryController extends Controller
      */
     public function index()
     {
+        if (request()->has('select')) {
+            $options = [];
+
+            foreach ($this->category->all() as $category) {
+                $options[] = [
+                    'value' => $category->id,
+                    'label' => $category->name,
+                ];
+            }
+
+            return response()->json($options);
+        }
+
         return CategoryResource::collection($this->category->all());
     }
 
