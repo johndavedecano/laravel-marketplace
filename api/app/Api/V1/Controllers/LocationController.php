@@ -40,6 +40,19 @@ class LocationController extends Controller
      */
     public function index()
     {
+        if (request()->has('select')) {
+            $options = [];
+
+            foreach ($this->location->all() as $location) {
+                $options[] = [
+                    'value' => $location->id,
+                    'label' => $location->name,
+                ];
+            }
+
+            return response()->json($options);
+        }
+
         return LocationResource::collection($this->location->all());
     }
 
