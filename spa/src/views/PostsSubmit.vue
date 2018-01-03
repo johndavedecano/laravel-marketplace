@@ -8,6 +8,8 @@ export default {
       title: '',
       description: '',
       price: 0.0,
+      location_id: 1,
+      category: 2,
     };
   },
 };
@@ -44,11 +46,11 @@ export default {
           </b-form-group>
 
           <b-form-group>
-            <select-location />
+            <select-location v-model="location_id"/>
           </b-form-group>
 
           <b-form-group>
-            <select-category />
+            <select-category v-model="category" />
           </b-form-group>
 
           <b-button type="submit" variant="primary">Submit</b-button>

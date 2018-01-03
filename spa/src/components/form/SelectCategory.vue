@@ -1,7 +1,8 @@
 <template>
 <v-select
-  :value.sync="selected"
+  :value.sync="localValue"
   :options="options"
+  :on-change="onChange"
   placeholder="Select Category"
 >
 </v-select>
@@ -11,10 +12,11 @@
 import axios from 'axios';
 import vSelect from 'vue-select';
 export default {
+  props: ['value'],
   components: { vSelect },
   data() {
     return {
-      selected: null,
+      localValue: null,
       options: [],
     };
   },
@@ -24,7 +26,12 @@ export default {
         return resp.data;
       })
       .then(options => {
-        this.options = options;
+        this.options = options.map(option => {
+          if (option.value === this.value) {
+            this.localValue = option;
+          }
+          return option;
+        });
       })
       .catch(error => {
         console.error(error);
@@ -34,6 +41,9 @@ export default {
   methods: {
     requestOptions() {
       return axios.get('/api/categories?select=true');
+    },
+    onChange({ value }) {
+      this.$emit('change', value);
     },
   },
 };
