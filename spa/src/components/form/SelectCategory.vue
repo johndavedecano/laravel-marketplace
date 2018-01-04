@@ -43,7 +43,7 @@ export default {
       return axios.get('/api/categories?select=true');
     },
     onChange({ value }) {
-      this.$emit('change', value);
+      this.$emit('input', value);
     },
   },
 };

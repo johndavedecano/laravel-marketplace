@@ -10,6 +10,7 @@ export default {
       price: 0.0,
       location_id: 1,
       category: 2,
+      status: 'active',
     };
   },
 };
@@ -51,6 +52,10 @@ export default {
 
           <b-form-group>
             <select-category v-model="category" />
+          </b-form-group>
+
+          <b-form-group>
+            <select-status v-model="status" />
           </b-form-group>
 
           <b-button type="submit" variant="primary">Submit</b-button>
