@@ -58,6 +58,13 @@ export default {
             <select-status v-model="status" />
           </b-form-group>
 
+          <h4>Upload Images</h4>
+
+          <b-form-group>
+            <dropbox />
+          </b-form-group>
+
+
           <b-button type="submit" variant="primary">Submit</b-button>
           <b-button type="reset" variant="danger">Reset</b-button>
         </b-form>
