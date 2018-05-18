@@ -5,9 +5,6 @@ npm install -g vue-build
 
 ## Scripts
 ```javascript
-// Initiate files/folders
-vue-build init
-
 // Run dev server
 vue-build dev
 
