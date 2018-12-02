@@ -8,4 +8,4 @@ api/vendor
 Homestead.json
 Homestead.yaml
 .env
-
+spa/dist

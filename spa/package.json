@@ -9,7 +9,7 @@
     "lodash": "^4.17.4",
     "mini-toastr": "^0.7.2",
     "vue-axios": "^2.0.2",
-    "vue-build": "^2.2.0",
+    "vue-build": "^3.0.0",
     "vue-meta": "^1.4.0",
     "vue-select": "github:sagalbot/vue-select",
     "vuex": "^3.0.1",
